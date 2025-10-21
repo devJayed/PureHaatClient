@@ -5,24 +5,26 @@ import { ColumnDef } from "@tanstack/react-table";
 import { NMTable } from "@/components/ui/core/NMTable";
 import { toast } from "sonner";
 import { IOrder } from "@/types";
-import { updateOrderStatus } from "@/services/Order";
 import { Button } from "@/components/ui/button";
-import { ORDER_STATUSES } from "@/constants/status";
+import { updatePaymentStatus } from "@/services/Order";
 import { getStatusColor } from "@/lib/utils";
+import { PAYMENT_STATUSES } from "@/constants/status";
 
 type TOrdersProps = {
   orders: IOrder[];
 };
 
-const ManageOrders = ({ orders }: TOrdersProps) => {
+const ManageDeliveries = ({ orders }: TOrdersProps) => {
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
-  const handleUpdateStatus = async (id: string, status: string) => {
-    // console.log({id, status});
+  const handleUpdatePaymentStatus = async (
+    id: string,
+    paymentStatus: string
+  ) => {
     try {
       setLoadingId(id);
-      const res = await updateOrderStatus(id, { status });
-      // console.log({"orders index.tsx": res });
+      const res = await updatePaymentStatus(id, { paymentStatus });
+      // console.log({ res });
       if (res.success) {
         toast.success("✅ Order status updated successfully!");
       } else {
@@ -55,23 +57,23 @@ const ManageOrders = ({ orders }: TOrdersProps) => {
         </div>
       ),
     },
-       {
-      accessorKey: "status",
-      header: () => <div className="min-w-[100px]">Order Status</div>,
+    {
+      accessorKey: "paymentStatus",
+      header: () => <div className="min-w-[100px]">Payment</div>,
       cell: ({ row }) => {
         return (
           <div className="flex flex-col items-center gap-2">
             <select
               className={`border rounded px-2 py-1 text-sm font-medium transition-colors duration-200 text-center ${getStatusColor(
-                row.original.status
+                row.original.paymentStatus
               )}`}
-              value={row.original.status}
+              value={row.original.paymentStatus}
               disabled={loadingId === row.original._id}
               onChange={(e) =>
-                handleUpdateStatus(row.original._id, e.target.value)
+                handleUpdatePaymentStatus(row.original._id, e.target.value)
               }
             >
-              {ORDER_STATUSES.map((status) => (
+              {PAYMENT_STATUSES.map((status) => (
                 <option key={status} value={status}>
                   {status}
                 </option>
@@ -87,11 +89,12 @@ const ManageOrders = ({ orders }: TOrdersProps) => {
         );
       },
     },
+
     {
-      accessorKey: "paymentStatus",
-      header: () => <div className="min-w-[100px]">Payment Status</div>,
+      accessorKey: "status",
+      header: () => <div className="min-w-[100px]">Order Status</div>,
       cell: ({ row }) => {
-        const status = row.original.paymentStatus;
+        const status = row.original.status;
 
         return (
           <div className="flex items-center gap-2">
@@ -107,7 +110,6 @@ const ManageOrders = ({ orders }: TOrdersProps) => {
       },
     },
 
- 
     {
       accessorKey: "createdAt",
       header: () => <div className="min-w-[130px]">Date</div>,
@@ -122,7 +124,7 @@ const ManageOrders = ({ orders }: TOrdersProps) => {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold">Manage Orders</h1>
+        <h1 className="text-xl font-bold">Manage My Deliveries</h1>
       </div>
 
       <NMTable data={orders} columns={columns} />
@@ -130,4 +132,4 @@ const ManageOrders = ({ orders }: TOrdersProps) => {
   );
 };
 
-export default ManageOrders;
+export default ManageDeliveries;

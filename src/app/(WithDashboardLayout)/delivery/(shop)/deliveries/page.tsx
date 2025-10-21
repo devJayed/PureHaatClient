@@ -1,14 +1,16 @@
-import OrdersTable from "@/components/modules/orders/OrdersTable";
+import ManageDeliveries from "@/components/modules/deliveries";
 import { getMyShopOrders } from "@/services/Order";
 
 const DeliveryPage = async () => {
-  const res = await getMyShopOrders();
-  console.log({res});
-  const data = res?.data ?? []; // 👈 make sure it's always array
+  const { data, meta } = await getMyShopOrders();
+
+  // console.log({ data });
 
   return (
     <div>
-      <OrdersTable data={data} />
+      <div>
+        <ManageDeliveries orders={data} />
+      </div>
     </div>
   );
 };

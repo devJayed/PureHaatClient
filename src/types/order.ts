@@ -14,7 +14,7 @@ export interface IOrder {
   status: "Pending" | "Processing" | "Completed" | "Cancelled";
   shippingAddress: string;
   paymentMethod: "COD" | "Card" | "Online";
-  paymentStatus: "Pending" | "Paid" | "Failed";
+  paymentStatus: "Pending" | "Processing" | "Paid" | "Cancelled" | "Failed";
   createdAt: string;
   updatedAt: string;
 }
