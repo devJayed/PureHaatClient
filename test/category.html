@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Category & Subcategory</title>
+  </head>
+  <body>
+    <h2>Subcategories with Root Category</h2>
+    <ul id="output"></ul>
+
+    <script>
+      // Your given data
+      const data = [
+        {
+          _id: "68be81fe83db4f0288890ccb",
+          name: "Ghee",
+          children: [
+            {
+              _id: "68d1a2c9182ceb40cca39999",
+              name: "দেশি গরুর ঘি (Deshi Cow Ghee)",
+              parent: { name: "Ghee" },
+              children: [],
+            },
+          ],
+        },
+        {
+          _id: "68be7f1283db4f0288890cb7",
+          name: "Honey",
+          children: [
+            {
+              _id: "68d0c481182ceb40cca384ca",
+              name: "লিচু ফুলের মধু (Litchi Flower Honey)",
+              parent: { name: "Honey" },
+              children: [],
+            },
+            {
+              _id: "68d0c2a9182ceb40cca384c7",
+              name: "সুন্দরবনের মধু (Sundarbans Honey)",
+              parent: { name: "Honey" },
+              children: [],
+            },
+          ],
+        },
+      ];
+
+      const output = document.getElementById("output");
+
+      // Loop through data
+      data.forEach((category) => {
+      // console.log(category);
+        if (category.children && category.children.length > 0) {
+          category.children.forEach((child) => {
+            const li = document.createElement("li");
+            li.textContent = `${child.name} -- ${category.name}`;
+            output.appendChild(li);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

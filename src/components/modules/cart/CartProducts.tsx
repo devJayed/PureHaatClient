@@ -1,0 +1,29 @@
+"use client";
+
+import Image from "next/image";
+import emptyCart from "@/assets/empty-cart.png";
+import CartProductCard from "./CartProductCard";
+import { useAppSelector } from "@/redux/hooks";
+import { CartProduct, orderedProductsSelector } from "@/redux/features/cartSlice";
+export default function CartProducts() {
+  const products = useAppSelector(orderedProductsSelector);
+
+  return (
+    <div className="border-2 border-white bg-background brightness-105 rounded-md col-span-8 h-full row-span-3 p-10 space-y-5">
+      {products.length === 0 && (
+        <div className="text-center text-gray-500">
+          <p className="text-lg font-semibold">আপনার কার্ট খালি</p>
+          <p className="mt-2">
+           আপনার কার্টে কোন প্রোডাক্ট নাই, যে প্রোডাক্টটি কিনতে চান সেই প্রডাক্ট কার্টে অ্যাড করুন। 
+          </p>
+          <div className="flex justify-center items-center ">
+            <Image src={emptyCart} alt="empty cart" />
+          </div>
+        </div>
+      )}
+      {products?.map((product: CartProduct) => (
+        <CartProductCard key={product._id} product={product} />
+      ))}
+    </div>
+  );
+}
