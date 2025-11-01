@@ -13,7 +13,7 @@ const HomePage = async () => {
     <div>
       {/* converting category as nav bar */}
 
-      <Suspense fallback={<div>Hero section ...</div>}>
+      <Suspense fallback={<div>Hero section loading ...</div>}>
         <HeroSection />
       </Suspense>
       <Suspense fallback={<div>Loading categories...</div>}>
