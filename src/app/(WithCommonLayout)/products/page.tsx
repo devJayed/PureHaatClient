@@ -1,10 +1,12 @@
+
+
 import AllProducts from "@/components/modules/products";
-import ProductBanner from "@/components/modules/products/banner";
 import CategoryCard from "@/components/ui/core/CategoryCard";
 import NMContainer from "@/components/ui/core/NMContainer";
 import { getAllCategories } from "@/services/Category";
 import { getAllProducts } from "@/services/Product";
 import { ICategory } from "@/types";
+import { Suspense } from "react";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
@@ -15,6 +17,7 @@ const AllProductsPage = async ({
 }) => {
   const query = await searchParams;
   // console.log({ query });
+
   const queriedCategory = query.category;
 
   const { data: categories } = await getAllCategories();
@@ -43,10 +46,17 @@ const AllProductsPage = async ({
           </div>
         </div>
       )}
-      <AllProducts
+      {/* <AllProducts
         products={products}
         categoryName={selectedCategory ? selectedCategory.name : "All Products"}
-      />
+      /> */}
+      {/* ✅ Wrap client component that uses useSearchParams */}
+      <Suspense fallback={<div>Loading products...</div>}>
+        <AllProducts
+          products={products}
+          categoryName={selectedCategory ? selectedCategory.name : "All Products"}
+        />
+      </Suspense>
     </NMContainer>
   );
 };

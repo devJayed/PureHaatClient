@@ -9,6 +9,7 @@ export const getAllProducts = async (
   limit?: string,
   query?: { [key: string]: string | string[] | undefined }
 ) => {
+  // console.log({page, limit, query});
   const params = new URLSearchParams();
 
   if (query?.price) {

@@ -132,8 +132,8 @@ export default function PaymentDetails() {
       <OrderSuccessDialog
         open={showSuccess}
         onClose={() => setShowSuccess(false)}
-        userName={user?.user?.name}
-        totalAmount={currencyFormatter(orderData?.finalAmount || 0)}
+
+      orderData={orderData}
       />
     </>
   );

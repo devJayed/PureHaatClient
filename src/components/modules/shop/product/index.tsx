@@ -29,7 +29,7 @@ import {
 
 const ManageProducts = ({
   products,
-  meta,
+  meta, 
 }: {
   products: IProduct[];
   meta: IMeta;

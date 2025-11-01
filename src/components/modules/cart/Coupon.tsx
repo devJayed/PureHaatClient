@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   couponSelector,
-  fetchCoupon,
+  // fetchCoupon,
   subTotalSelector,
 } from "@/redux/features/cartSlice";
 
@@ -26,17 +26,17 @@ export default function Coupon() {
     form.reset();
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    try {
-      const res = await dispatch(
-        fetchCoupon({ couponCode: data.coupon, subTotal })
-      ).unwrap();
-      // console.log(res, "inside component");
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.message);
-    }
-  };
+  // const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  //   try {
+  //     const res = await dispatch(
+  //       fetchCoupon({ couponCode: data.coupon, subTotal })
+  //     ).unwrap();
+  //     // console.log(res, "inside component");
+  //   } catch (error: any) {
+  //     console.log(error);
+  //     toast.error(error.message);
+  //   }
+  // };
 
   return (
     <div className="border border-gray-200 bg-white rounded-lg shadow-sm col-span-4 p-6">
@@ -45,7 +45,8 @@ export default function Coupon() {
         <p className="text-gray-500">যদি আপনার কুপন থাকে</p>
 
         <Form {...form}>
-          <form className="mt-3" onSubmit={form.handleSubmit(onSubmit)}>
+          {/* <form className="mt-3" onSubmit={form.handleSubmit(onSubmit)}></form> */}
+          <form className="mt-3">
             <FormField
               control={form.control}
               name="coupon"

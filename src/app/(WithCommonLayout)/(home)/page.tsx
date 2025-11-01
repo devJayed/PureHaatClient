@@ -2,19 +2,29 @@ import Category from "@/components/modules/home/Category";
 import FeaturedProducts from "@/components/modules/home/FeaturedProducts";
 import FlashSale from "@/components/modules/home/FlashSale";
 import HeroSection from "@/components/modules/home/HeroSection";
-import { getNewToken } from "@/services/AuthService";
+import { Suspense } from "react";
+// import { getNewToken } from "@/services/AuthService";
 
 const HomePage = async () => {
-  const result = await getNewToken();
+  // const result = await getNewToken();
   // console.log(result);
 
   return (
     <div>
       {/* converting category as nav bar */}
-      <HeroSection />
-      <Category />
-      <FeaturedProducts />
-      <FlashSale />
+
+      <Suspense fallback={<div>Hero section ...</div>}>
+        <HeroSection />
+      </Suspense>
+      <Suspense fallback={<div>Loading categories...</div>}>
+        <Category />
+      </Suspense>
+      <Suspense fallback={<div>Loading featured products...</div>}>
+        <FeaturedProducts />
+      </Suspense>
+      <Suspense fallback={<div>Loading flash sale...</div>}>
+        <FlashSale />
+      </Suspense>
     </div>
   );
 };

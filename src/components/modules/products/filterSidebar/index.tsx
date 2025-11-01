@@ -1,11 +1,11 @@
 "use client";
 
 import { Slider } from "@/components/ui/slider";
-import { Card, CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useEffect, useState } from "react";
-import { getAllCategories } from "@/services/Category";
-import { toast } from "sonner";
+// import { Card, CardContent } from "@/components/ui/card";
+// import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
+// import { getAllCategories } from "@/services/Category";
+// import { toast } from "sonner";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -15,7 +15,7 @@ import { Star } from "lucide-react";
 const FilterSidebar = () => {
   const [price, setPrice] = useState([0]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
   const pathname = usePathname();
