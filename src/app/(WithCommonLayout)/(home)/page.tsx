@@ -5,7 +5,7 @@ import HeroSection from "@/components/modules/home/HeroSection";
 import { getNewToken } from "@/services/AuthService";
 
 const HomePage = async () => {
-  const result = await getNewToken();
+  // const result = await getNewToken();
   // console.log(result);
 
   return (
