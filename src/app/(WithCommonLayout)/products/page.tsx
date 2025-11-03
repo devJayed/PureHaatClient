@@ -1,4 +1,4 @@
-
+export const dynamic = "force-dynamic";
 
 import AllProducts from "@/components/modules/products";
 import CategoryCard from "@/components/ui/core/CategoryCard";
@@ -54,7 +54,9 @@ const AllProductsPage = async ({
       <Suspense fallback={<div>Loading products...</div>}>
         <AllProducts
           products={products}
-          categoryName={selectedCategory ? selectedCategory.name : "All Products"}
+          categoryName={
+            selectedCategory ? selectedCategory.name : "All Products"
+          }
         />
       </Suspense>
     </NMContainer>

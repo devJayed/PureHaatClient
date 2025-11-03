@@ -8,6 +8,8 @@ import ProductBanner from "@/components/modules/products/banner";
 import NMContainer from "@/components/ui/core/NMContainer";
 import { Suspense } from "react";
 
+export const dynamic = 'force-dynamic';
+
 const CartPage = () => {
   return (
     <NMContainer>

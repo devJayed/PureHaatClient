@@ -5,6 +5,8 @@ import HeroSection from "@/components/modules/home/HeroSection";
 import { Suspense } from "react";
 // import { getNewToken } from "@/services/AuthService";
 
+export const dynamic = 'force-dynamic';
+
 const HomePage = async () => {
   // const result = await getNewToken();
   // console.log(result);
