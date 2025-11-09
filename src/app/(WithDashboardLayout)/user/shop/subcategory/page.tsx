@@ -1,16 +1,20 @@
+// /user/shop/subcategory/page.tsx
+"use client";
+import ManageSubcategories from "@/components/modules/shop/subcategory";
+import { useEffect, useState } from "react";
 import { getAllCategories } from "@/services/Category";
 
-import ManageSubcategories from "@/components/modules/shop/subcategory";
+const ProductCategoryPage = () => {
+  const [categories, setCategories] = useState([]);
 
-const ProductCategoryPage = async () => {
-    
-  const { data = [], meta } = await getAllCategories();
-  // console.log({data});
-  return (
-    <div>
-      <ManageSubcategories categories={data} />
-    </div>
-  );
+  useEffect(() => {
+    (async () => {
+      const { data = [] } = await getAllCategories();
+      setCategories(data);
+    })();
+  }, []);
+
+  return <ManageSubcategories categories={categories} />;
 };
 
 export default ProductCategoryPage;
