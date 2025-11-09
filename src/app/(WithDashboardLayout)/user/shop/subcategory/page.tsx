@@ -4,7 +4,7 @@ import ManageSubcategories from "@/components/modules/shop/subcategory";
 
 const ProductCategoryPage = async () => {
     
-  const { data, meta } = await getAllCategories();
+  const { data = [], meta } = await getAllCategories();
   // console.log({data});
   return (
     <div>

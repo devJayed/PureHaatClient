@@ -10,7 +10,7 @@ const ViewProductPage = async ({
   const { productId } = await params;
   // console.log({ productId });
 
-  const { data: product } = await getSingleProduct(productId);
+  const { data: product = [] } = await getSingleProduct(productId);
 
   // console.log({ product }); 
 

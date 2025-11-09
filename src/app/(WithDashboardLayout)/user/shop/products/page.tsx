@@ -10,7 +10,7 @@ const ManageProductsPage = async ({
   const { page } = await searchParams;
   // console.log({page});
 
-  const { data, meta } = await getAllProducts(page, "3");
+  const { data = [], meta } = await getAllProducts(page, "3");
   // console.log({data, meta});
   
   return (
