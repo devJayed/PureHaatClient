@@ -2,10 +2,10 @@ import Category from "@/components/modules/home/Category";
 import FeaturedProducts from "@/components/modules/home/FeaturedProducts";
 import FlashSale from "@/components/modules/home/FlashSale";
 import HeroSection from "@/components/modules/home/HeroSection";
-import { Suspense } from "react";
+// import { Suspense } from "react";
 // import { getNewToken } from "@/services/AuthService";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const HomePage = async () => {
   // const result = await getNewToken();
@@ -14,19 +14,12 @@ const HomePage = async () => {
   return (
     <div>
       {/* converting category as nav bar */}
-
-      <Suspense fallback={<div>Hero section loading ...</div>}>
+      {/* <Suspense fallback={<div>Loading cart page...</div>}> */}
         <HeroSection />
-      </Suspense>
-      <Suspense fallback={<div>Loading categories...</div>}>
         <Category />
-      </Suspense>
-      <Suspense fallback={<div>Loading featured products...</div>}>
         <FeaturedProducts />
-      </Suspense>
-      <Suspense fallback={<div>Loading flash sale...</div>}>
         <FlashSale />
-      </Suspense>
+      {/* </Suspense> */}
     </div>
   );
 };

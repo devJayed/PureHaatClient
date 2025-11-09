@@ -1,4 +1,3 @@
-"use client";
 
 import Address from "@/components/modules/cart/Address";
 import CartProducts from "@/components/modules/cart/CartProducts";
@@ -8,24 +7,26 @@ import ProductBanner from "@/components/modules/products/banner";
 import NMContainer from "@/components/ui/core/NMContainer";
 import { Suspense } from "react";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const CartPage = () => {
   return (
-    <NMContainer>
-      <Suspense fallback={<div>Loading your banner...</div>}>
+    <Suspense fallback={<div>Loading cart page...</div>}>
+      <NMContainer>
         <ProductBanner title="Cart Page" path="Home - Cart" />
-      </Suspense>
-      {/* ✅ Wrap cart content inside Suspense */}
-      <Suspense fallback={<div>Loading your cart...</div>}>
+
+        {/* ✅ Wrap cart content inside Suspense */}
+
         <div className="grid grid-cols-12 gap-8 my-5">
           <CartProducts />
           <Address></Address>
-          <Coupon />
+           
+            <Coupon />
+
           <PaymentDetails></PaymentDetails>
         </div>
-      </Suspense>
-    </NMContainer>
+      </NMContainer>
+    </Suspense>
   );
 };
 

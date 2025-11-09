@@ -33,33 +33,35 @@ const AllProductsPage = async ({
   // console.log({ selectedCategory });
 
   return (
-    <NMContainer>
-      {/* <ProductBanner title="All Products" path="Home - Products" /> */}
-      {/* Featured collection - all categories  */}
-      {!queriedCategory && (
-        <div>
-          <h2 className="text-xl font-bold my-5">Featured Collection </h2>
-          <div className="grid grid-cols-6 gap-6">
-            {categories?.slice(0, 6).map((category: ICategory, idx: number) => (
-              <CategoryCard key={idx} category={category} />
-            ))}
+    <Suspense fallback={<div>Loading cart page...</div>}>
+      <NMContainer>
+        {/* <ProductBanner title="All Products" path="Home - Products" /> */}
+        {/* Featured collection - all categories  */}
+        {!queriedCategory && (
+          <div>
+            <h2 className="text-xl font-bold my-5">Featured Collection </h2>
+            <div className="grid grid-cols-6 gap-6">
+              {categories
+                ?.slice(0, 6)
+                .map((category: ICategory, idx: number) => (
+                  <CategoryCard key={idx} category={category} />
+                ))}
+            </div>
           </div>
-        </div>
-      )}
-      {/* <AllProducts
+        )}
+        {/* <AllProducts
         products={products}
         categoryName={selectedCategory ? selectedCategory.name : "All Products"}
       /> */}
-      {/* ✅ Wrap client component that uses useSearchParams */}
-      <Suspense fallback={<div>Loading products...</div>}>
+
         <AllProducts
           products={products}
           categoryName={
             selectedCategory ? selectedCategory.name : "All Products"
           }
         />
-      </Suspense>
-    </NMContainer>
+      </NMContainer>
+    </Suspense>
   );
 };
 
