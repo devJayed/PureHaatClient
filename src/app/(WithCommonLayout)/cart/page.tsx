@@ -12,7 +12,9 @@ const CartPage = () => {
 return (
     <Suspense fallback={<div>Loading cart page...</div>}>
       <NMContainer>
-        <ProductBanner title="Cart Page" path="Home - Cart" />
+        <div className="mt-2 sm:mt-4">
+          <ProductBanner title="Cart Page" path="Home - Cart" />
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 my-10">
 
