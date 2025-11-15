@@ -87,7 +87,7 @@ export default function PaymentDetails() {
 
   return (
     <>
-      <div className="border border-gray-200 bg-white rounded-lg brightness-105 shadow-sm col-span-4 h-fit p-5">
+      <div className="border border-gray-200 bg-white rounded-xl shadow-md p-5 md:p-6">
         <h1 className="text-2xl font-bold">পেমেন্ট বিস্তারিত</h1>
 
         {coupon.isLoading && <div>Loading...</div>}

@@ -1,4 +1,3 @@
-
 import Address from "@/components/modules/cart/Address";
 import CartProducts from "@/components/modules/cart/CartProducts";
 import Coupon from "@/components/modules/cart/Coupon";
@@ -10,20 +9,25 @@ import { Suspense } from "react";
 export const dynamic = "force-dynamic";
 
 const CartPage = () => {
-  return (
+return (
     <Suspense fallback={<div>Loading cart page...</div>}>
       <NMContainer>
         <ProductBanner title="Cart Page" path="Home - Cart" />
 
-        {/* ✅ Wrap cart content inside Suspense */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 my-10">
 
-        <div className="grid grid-cols-12 gap-8 my-5">
-          <CartProducts />
-          <Address></Address>
-           
+          {/* Left Section */}
+          <div className="lg:col-span-8 space-y-6">
+            <CartProducts />
+          </div>
+
+          {/* Right Section */}
+          <div className="lg:col-span-4 space-y-6">
+            <Address />
             <Coupon />
+            <PaymentDetails />
+          </div>
 
-          <PaymentDetails></PaymentDetails>
         </div>
       </NMContainer>
     </Suspense>

@@ -7,14 +7,11 @@ import {
   removeProduct,
 } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
-
 import { Minus, Plus, Trash } from "lucide-react";
 import Image from "next/image";
-
-import { toast } from "sonner"; 
+import { toast } from "sonner";
 
 export default function CartProductCard({ product }: { product: CartProduct }) {
-  // console.log({ product });
   const dispatch = useAppDispatch();
 
   const handleIncrementQuantity = (id: string) => {
@@ -27,65 +24,89 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
 
   const handleRemoveProduct = (id: string) => {
     dispatch(removeProduct(id));
-     toast.success(`${product.name} removed from cart 🗑️`);
+    toast.success(`${product.name} removed from cart 🗑️`);
   };
 
   return (
-    <div className="bg-white rounded-lg flex p-5 gap-5">
-      <div className="h-full w-32 rounded-md overflow-hidden">
+    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-5 md:p-6 flex flex-col sm:flex-row gap-4 sm:gap-5 my-2 sm:my-4">
+
+      {/* Product Image */}
+      <div className="w-full sm:w-32 h-32 sm:h-auto rounded-lg overflow-hidden flex-shrink-0">
         <Image
           src={product?.images?.[0].url || "/placeholder.png"}
           height={200}
           width={200}
           alt="product"
-          className="object-cover rounded-md"
+          className="object-cover w-full h-full"
         />
       </div>
+
+      {/* Product Content */}
       <div className="flex flex-col justify-between flex-grow">
-        <h1 className="text-xl font-semibold">{product?.name}</h1>
-        <div className="flex gap-5 my-2">
+        {/* Product Name */}
+        <h1 className="text-lg sm:text-xl font-semibold leading-tight">
+          {product?.name}
+        </h1>
+
+        {/* Color + Stock */}
+        <div className="flex flex-wrap gap-3 text-sm sm:text-base my-2">
           <p>
             <span className="text-gray-500">Color:</span>{" "}
             <span className="font-semibold">Black</span>
           </p>
+
           <p>
-            <span className="text-gray-500">Stock Availability:</span>{" "}
+            <span className="text-gray-500">Stock:</span>{" "}
             <span className="font-semibold">{product?.stock}</span>
           </p>
         </div>
-        <hr className="my-1" />
-        <div className="flex items-center justify-between">
-          <h2>
-            Price:
+
+        <hr className="my-2" />
+
+        {/* Price + Controls */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-1">
+
+          {/* Price */}
+          <h2 className="text-base sm:text-lg font-semibold">
+            Price:{" "}
             {product.offerPrice
               ? currencyFormatter(product.offerPrice)
               : currencyFormatter(product.price)}
           </h2>
-          <div className="flex items-center gap-2">
-            <p className="text-gray-500 font-semibold">Quantity</p>
+
+          {/* Quantity & Trash */}
+          <div className="flex items-center gap-2 sm:gap-3">
+
+            <p className="text-gray-500 font-semibold hidden sm:block">
+              Qty
+            </p>
+
             <Button
               onClick={() => handleDecrementQuantity(product._id)}
               variant="outline"
-              className="size-8 rounded-sm"
+              className="size-8 rounded-md"
             >
-              <Minus />
+              <Minus className="w-4 h-4" />
             </Button>
-            <p className="font-semibold text-xl p-2">
+
+            <p className="font-semibold text-lg px-2">
               {product?.orderQuantity}
             </p>
+
             <Button
               onClick={() => handleIncrementQuantity(product._id)}
               variant="outline"
-              className="size-8 rounded-sm"
+              className="size-8 rounded-md"
             >
-              <Plus />
+              <Plus className="w-4 h-4" />
             </Button>
+
             <Button
               onClick={() => handleRemoveProduct(product._id)}
               variant="outline"
-              className="size-8 rounded-sm"
+              className="size-8 rounded-md"
             >
-              <Trash className="text-red-500/50" />
+              <Trash className="text-red-500/70 w-4 h-4" />
             </Button>
           </div>
         </div>

@@ -39,7 +39,7 @@ export default function Coupon() {
   // };
 
   return (
-    <div className="border border-gray-200 bg-white rounded-lg shadow-sm col-span-4 p-6">
+    <div className="border border-gray-200 bg-white rounded-xl shadow-sm p-5 md:p-6">
       <div className="flex flex-col justify-between h-full">
         <h1 className="text-2xl font-bold">কুপন ব্যবহার করুন</h1>
         <p className="text-gray-500">যদি আপনার কুপন থাকে</p>

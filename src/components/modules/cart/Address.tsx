@@ -33,7 +33,7 @@ export default function Address() {
   };
 
   return (
-    <div className="border border-gray-200 bg-white rounded-lg shadow-sm col-span-4 p-6">
+    <div className="border border-gray-200 bg-white rounded-xl shadow-sm p-5 md:p-6">
       <h1 className="text-xl font-bold text-gray-800 mb-1">শিপিং অ্যাড্রেস</h1>
       <p className="text-gray-500 mb-6 text-sm">
         অর্ডার করতে আপনার তথ্য দিন 
