@@ -1,9 +1,3 @@
-type Specification = {
-  processor: string;
-  ram: string;
-  storage: string;
-  display: string;
-};
 
 export interface IProduct {
   _id: string;
@@ -27,7 +21,7 @@ export interface IProduct {
   averageRating: number;
   ratingCount: number;
   availableSizes: string[];
-  specification: Specification;
+  specification: Record<string, string>;
   keyFeatures: string[];
   slug: string;
   createdAt: string;

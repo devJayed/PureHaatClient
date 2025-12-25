@@ -7,46 +7,51 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 
 import { cities } from "@/constants/cities";
-import {
-  citySelector,
-  shippingAddressSelector,
-  updateCity,
-  updateShippingAddress,
-} from "@/redux/features/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { updateCity } from "@/redux/features/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import { Truck } from "lucide-react";
 
 export default function Address() {
   const dispatch = useAppDispatch();
-  const selectedCity = useAppSelector(citySelector);
-  const shippingAddress = useAppSelector(shippingAddressSelector);
+  // const selectedCity = useAppSelector(citySelector);
+  // const shippingAddress = useAppSelector(shippingAddressSelector);
+
+  // const handleName = (address: string) => {
+  //   dispatch(updateName(address));
+  // };
 
   const handleCitySelect = (city: string) => {
     dispatch(updateCity(city));
   };
 
-  const handleShippingAddress = (address: string) => {
-    dispatch(updateShippingAddress(address));
-  };
+  // const handleShippingAddress = (address: string) => {
+  //   dispatch(updateShippingAddress(address));
+  // };
 
   return (
-    <div className="border border-gray-200 bg-white rounded-xl shadow-sm p-5 md:p-6">
-      <h1 className="text-xl font-bold text-gray-800 mb-1">শিপিং অ্যাড্রেস</h1>
-      <p className="text-gray-500 mb-6 text-sm">
-        অর্ডার করতে আপনার তথ্য দিন 
-      </p>
+    <div className="">
+      <h1 className="font-bold text-lg">
+        শিপিং মেথড <span className="text-red-500">*</span>
+      </h1>
 
       {/* City Select */}
-      <div className="mb-5">
-        <Label htmlFor="city" className="mb-2 block text-sm font-medium text-gray-700">
-         আপনার শহর সিলেক্ট করুনঃ 
-        </Label>
+      <div className="flex items-center border hover:border-amber-600 rounded-md overflow-hidden hover:text-amber-600">
+        <div className="bg-gray-200 h-full px-4 py-3 flex items-center justify-center border-r">
+          <Truck className="w-5 h-5" />
+        </div>
         <Select onValueChange={handleCitySelect}>
-          <SelectTrigger id="city" className="w-full">
-            <SelectValue placeholder="Choose a city" />
+          <SelectTrigger
+            id="city"
+            className="w-full py-5 border-0
+    shadow-none
+    focus:border-0
+    focus:ring-0
+    focus-visible:ring-0
+    focus-visible:ring-offset-0"
+          >
+            <SelectValue placeholder="শিপিং মেথড সিলেক্ট করুণ" />
           </SelectTrigger>
           <SelectContent>
             {cities.map((city) => (
@@ -56,21 +61,6 @@ export default function Address() {
             ))}
           </SelectContent>
         </Select>
-      </div>
-
-      {/* Full Address */}
-      <div>
-        <Label htmlFor="full-address" className="mb-2 block text-sm font-medium text-gray-700">
-          সম্পূর্ণ ঠিকানা লিখুনঃ
-        </Label>
-        <Textarea
-          id="full-address"
-          value={shippingAddress}
-          onChange={(e) => handleShippingAddress(e.target.value)}
-          placeholder="হাউস নং, রোড নং, এরিয়া, থানা ..."
-          rows={5}
-          className="resize-none"
-        />
       </div>
     </div>
   );

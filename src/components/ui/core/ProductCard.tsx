@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,13 +10,16 @@ import {
 } from "@/components/ui/card";
 import { addProduct } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import { toast } from "sonner";
 
 import { IProduct } from "@/types";
-import { Heart, ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart, Wallet } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const handleAddProduct = (product: IProduct) => {
@@ -27,30 +29,35 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   };
 
   return (
-    <Card className="p-3 min-w-[216px]">
+    <Card
+      className="p-3 min-w-[216px] bg-gray-50 hover:bg-gray-100 transition-all duration-300 border 
+      border-transparent hover:border-yellow-500 hover:scale-105"
+    >
       <CardHeader className="relative p-0 h-48">
-        <Image
-          src={
-            product?.images[0].url ||
-            "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
-          }
-          width={500}
-          height={500}
-          alt="product image"
-          className="rounded-sm h-48 object-cover"
-        />
-        {product?.stock === 0 && (
-          <div className="absolute left-2 top-0 bg-red-500 text-white px-2 rounded-full">
-            Out of Stock
-          </div>
-        )}
+        <Link href={`/products/${product?._id}`} passHref>
+          <Image
+            src={
+              product?.images[0].url ||
+              "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
+            }
+            width={500}
+            height={500}
+            alt="product image"
+            className="rounded-sm h-48 object-cover"
+          />
+          {product?.stock === 0 && (
+            <div className="absolute left-2 top-0 bg-red-500 text-white px-2 rounded-full">
+              Out of Stock
+            </div>
+          )}
+        </Link>
       </CardHeader>
 
       <CardContent className=" p-0 mt-2">
         <Link href={`/products/${product?._id}`} passHref>
           <CardTitle
             title={product?.name}
-            className="font-semibold cursor-pointer text-sm"
+            className="font-bold cursor-pointer text-md"
           >
             {product?.name.length > 20
               ? product?.name?.slice(0, 20) + "..."
@@ -59,7 +66,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         </Link>
 
         <div className="flex items-center justify-between my-2">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-700">
             {product?.offerPrice ? (
               <>
                 <span className="font-semibold text-xs mr-2 text-orange-400">
@@ -92,9 +99,22 @@ const ProductCard = ({ product }: { product: IProduct }) => {
             disabled={product?.stock === 0}
             size="sm"
             variant="outline"
-            className="flex-1 min-w-[120px]"
+            className="flex-1 min-w-[120px] cursor-pointer disabled:cursor-not-allowed hover:bg-gray-400 hover:text-white"
           >
             <ShoppingCart /> Add to Cart
+          </Button>
+          <Button
+            onClick={() => {
+              handleAddProduct(product); // 1) Add to cart
+              router.push("/cart"); // 2) Redirect
+            }}
+            disabled={product?.stock === 0}
+            size="sm"
+            variant="outline"
+            className="flex-1 min-w-[120px] cursor-pointer w-full disabled:cursor-not-allowed hover:bg-amber-500 hover:text-white"
+          >
+            <Wallet className="mr-2" />
+            Buy Now
           </Button>
         </div>
       </CardFooter>

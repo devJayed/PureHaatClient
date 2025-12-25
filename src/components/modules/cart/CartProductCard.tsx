@@ -29,7 +29,6 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-5 md:p-6 flex flex-col sm:flex-row gap-4 sm:gap-5 my-2 sm:my-4">
-
       {/* Product Image */}
       <div className="w-full sm:w-32 h-32 sm:h-auto rounded-lg overflow-hidden flex-shrink-0">
         <Image
@@ -65,7 +64,6 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
 
         {/* Price + Controls */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-1">
-
           {/* Price */}
           <h2 className="text-base sm:text-lg font-semibold">
             Price:{" "}
@@ -76,10 +74,7 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
 
           {/* Quantity & Trash */}
           <div className="flex items-center gap-2 sm:gap-3">
-
-            <p className="text-gray-500 font-semibold hidden sm:block">
-              Qty
-            </p>
+            <p className="text-gray-500 font-semibold hidden sm:block">Qty</p>
 
             <Button
               onClick={() => handleDecrementQuantity(product._id)}
