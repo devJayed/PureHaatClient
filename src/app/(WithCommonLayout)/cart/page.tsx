@@ -26,7 +26,6 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { MapPinPlus, Phone, User } from "lucide-react";
 
-import { currencyFormatter } from "@/lib/currencyFormatter";
 import {
   CartProduct,
   orderedProductsSelector,
@@ -54,7 +53,7 @@ const CartPage = () => {
   return (
     <>
       <NMContainer>
-        <div className="mt-1 sm:mt-2">
+        <div className="mt-18 sm:mt-2">
           <ProductBanner title="Cart Page" path="Home - Cart" />
         </div>
 
