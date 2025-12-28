@@ -28,14 +28,26 @@ export const createCategory = async (data: FormData) => {
 export const getAllCategories = async () => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/category`, {
+      cache: "no-store",
       next: {
         tags: ["CATEGORY"],
       },
     });
-    // console.log({ res });
-    return res.json();
-  } catch (error: any) {
-    return Error(error);
+    if (!res.ok) {
+      console.error("Failed to fetch categories:", res.status);
+      return { data: [] };
+    }
+    const text = await res.text();
+
+    try {
+      return JSON.parse(text);
+    } catch {
+      console.error("Invalid JSON returned:", text);
+      return { data: [] };
+    }
+  } catch (error) {
+    console.error("Category fetch error:", error);
+    return { data: [] };
   }
 };
 

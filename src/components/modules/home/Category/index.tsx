@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Category = async () => {
   // await connection();
-  const { data: categories } = await getAllCategories();
+  const categories = (await getAllCategories())?.data ?? [];
 
   return (
     <NMContainer className="my-20">
