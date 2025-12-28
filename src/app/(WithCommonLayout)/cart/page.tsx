@@ -33,8 +33,6 @@ import {
 } from "@/redux/features/cartSlice";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic";
-
 const CartPage = () => {
   const products = useAppSelector(orderedProductsSelector);
   const [open, setOpen] = useState(false);

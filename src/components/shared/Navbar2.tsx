@@ -1,5 +1,6 @@
 import { getAllCategories } from "@/services/Category";
 import Navbar2Client from "../ui/core/Navbar2Clinet";
+import { Suspense } from "react";
 
 // ✅ Server Component
 const Navbar2 = async () => {
@@ -7,7 +8,9 @@ const Navbar2 = async () => {
 
   return (
     <div className="hidden sm:block">
-      <Navbar2Client categories={categories || []} />
+      <Suspense fallback={null}>
+        <Navbar2Client categories={categories || []} />
+      </Suspense>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 "use client";
 
-
 import ProductCard from "@/components/ui/core/ProductCard";
 import { IProduct } from "@/types";
 import FilterSidebar from "./filterSidebar";
+import { Suspense } from "react";
 
 const AllProducts = ({
   products,
@@ -16,7 +16,9 @@ const AllProducts = ({
     <div className="flex gap-8 my-10">
       {/* Left Sidebar */}
       <div className="hidden lg:block w-84">
-        <FilterSidebar />
+        <Suspense fallback={null}>
+          <FilterSidebar />
+        </Suspense>
       </div>
       {/* Right Section */}
       <div className="flex flex-col gap-y-4 w-full">

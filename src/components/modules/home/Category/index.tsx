@@ -4,8 +4,10 @@ import NMContainer from "@/components/ui/core/NMContainer";
 import { getAllCategories } from "@/services/Category";
 import { ICategory } from "@/types";
 import Link from "next/link";
+// import { connection } from "next/server";
 
 const Category = async () => {
+  // await connection();
   const { data: categories } = await getAllCategories();
 
   return (
