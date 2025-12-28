@@ -38,14 +38,15 @@ const AllProductsPage = async ({
         {/* <ProductBanner title="All Products" path="Home - Products" /> */}
         {/* Featured collection - all categories  */}
         {!queriedCategory && (
-          <div>
+          <div className="mt-18 sm:mt-0">
             <h2 className="text-xl font-bold my-5">Featured Collection </h2>
-            <div className="grid grid-cols-6 gap-6">
-              {categories
-                ?.slice(0, 6)
-                .map((category: ICategory, idx: number) => (
-                  <CategoryCard key={idx} category={category} />
-                ))}
+            <div
+              className="grid grid-cols-3
+      sm:grid-cols-4 sm:grid-cols-5 lg:grid-cols-6 gap-4 mb-8 items-center justify-center"
+            >
+              {categories?.map((category: ICategory, idx: number) => (
+                <CategoryCard key={idx} category={category} />
+              ))}
             </div>
           </div>
         )}

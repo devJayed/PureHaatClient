@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type TimeLeft = {
   hours: number;
@@ -46,18 +46,18 @@ export default function CountDown() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center space-x-4 text-gray-800">
+    <div className="flex items-center justify-start space-x-2 text-gray-800">
       {(["hours", "minutes", "seconds"] as const).map((unit) => (
         <div
           key={unit}
-          className={`flex flex-col items-center px-6 py-1 rounded-full w-32 ${
+          className={`flex flex-col items-center px-4 py-1 rounded-full w-28 ${
             unit === "seconds"
               ? "border border-red-500 text-red-500"
               : "bg-gray-100"
           }`}
         >
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold">
+            <span className="text-xl font-bold">
               {timeLeft[unit].toString().padStart(2, "0")}
             </span>
             <span className="text-sm">

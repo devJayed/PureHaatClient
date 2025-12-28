@@ -11,9 +11,9 @@ const FeaturedProducts = async () => {
 
   return (
     <div className=" bg-white bg-opacity-50 pt-6 pb-8">
-      <NMContainer className="my-16">
+      <NMContainer className="my-4">
         <div className="flex items-center justify-between ">
-          <h2 className="text-3xl font-bold">Featured Products</h2>
+          <h2 className="text-xl font-bold">Featured Products</h2>
           <Link href="/products">
             <Button variant="outline" className="rounded-full">
               All Collection

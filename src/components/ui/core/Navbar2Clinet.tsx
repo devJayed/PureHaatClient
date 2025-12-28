@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "../button";
-import Link from "next/link";
 import { ICategory } from "@/types";
-import Image from "next/image";
-import { useSearchParams, usePathname } from "next/navigation"; // 👈 added usePathname
 import clsx from "clsx";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation"; // 👈 added usePathname
+import { Button } from "../button";
 
 interface Navbar2ClientProps {
   categories: ICategory[];
@@ -21,9 +21,9 @@ const Navbar2Client = ({ categories }: Navbar2ClientProps) => {
     pathname === "/products" && selectedCategory === null;
 
   return (
-    <header className="border-b w-full bg-white/80 backdrop-blur-md sticky top-0 z-50">
-      <div className="container flex justify-between items-center mx-auto h-16 px-3 overflow-x-auto">
-        <nav className="flex flex-nowrap gap-2">
+    <header className="sm:border-b w-full bg-white/80 backdrop-blur-md sticky top-0 z-10 sm:mt-16">
+      <div className="container flex justify-between items-center mx-auto sm:h-16 px-3 sm:overflow-x-auto">
+        <nav className="flex flex-col sm:flex-row flex-nowrap gap-2">
           {/* ✅ All Products */}
           <Link href="/products">
             <Button

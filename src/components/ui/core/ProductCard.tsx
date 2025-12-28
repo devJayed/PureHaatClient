@@ -29,10 +29,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   };
 
   return (
-    <Card
-      className="p-3 min-w-[216px] bg-gray-50 hover:bg-gray-100 transition-all duration-300 border 
-      border-transparent hover:border-yellow-500 hover:scale-105"
-    >
+    <Card className="p-3 min-w-[216px] bg-white transition-all duration-300 border border-gray-300 hover:border-yellow-500 hover:scale-103 shadow-md">
       <CardHeader className="relative p-0 h-48">
         <Link href={`/products/${product?._id}`} passHref>
           <Image

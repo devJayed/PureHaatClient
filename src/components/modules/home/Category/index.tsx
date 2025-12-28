@@ -11,17 +11,20 @@ const Category = async () => {
   const categories = (await getAllCategories())?.data ?? [];
 
   return (
-    <NMContainer className="my-20">
-      <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold">Category</h2>
+    <NMContainer className="my-4">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-bold">Category</h2>
         <Link href="/products">
           <Button variant="outline" className="rounded-full">
             All Products
           </Button>
         </Link>
       </div>
-      <div className="grid grid-cols-6 gap-6 mt-10">
-        {categories?.slice(0, 6).map((category: ICategory, idx: number) => (
+      <div
+        className="grid grid-cols-3
+      sm:grid-cols-4 sm:grid-cols-5 lg:grid-cols-6 gap-4 mb-8 items-center justify-center"
+      >
+        {categories?.map((category: ICategory, idx: number) => (
           <CategoryCard key={idx} category={category} />
         ))}
       </div>

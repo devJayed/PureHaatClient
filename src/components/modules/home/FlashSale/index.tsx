@@ -11,11 +11,10 @@ const FlashSale = async () => {
 
   return (
     <div className=" bg-white bg-opacity-50 pt-6 pb-8">
-      <NMContainer className="my-16">
-        <div className="flex items-center justify-between ">
-          <div className="flex items-center gap-8">
-            <h2 className="text-3xl font-bold">Flash Sale</h2>
-            <CountDown />
+      <NMContainer className="my-4">
+        <div className="flex items-center justify-between mb-4">
+          <div className="">
+            <h2 className="text-xl font-bold">Flash Sale</h2>
           </div>
 
           <Link href="/products">
@@ -23,6 +22,9 @@ const FlashSale = async () => {
               All Collection
             </Button>
           </Link>
+        </div>
+        <div className="">
+          <CountDown />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full mt-10">
           {products?.slice(0, 4)?.map((product: IProduct, idx: number) => (

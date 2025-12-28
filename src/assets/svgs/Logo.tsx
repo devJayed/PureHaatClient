@@ -5,8 +5,8 @@ export default function Logo() {
     <Image
       src="/pureHaatLogo.jpg"
       alt="Company Logo"
-      width={80}
-      height={60}
+      width={70}
+      height={50}
       className="object-contain"
       priority
     />
