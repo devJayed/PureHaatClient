@@ -9,7 +9,7 @@ import { revalidateTag } from "next/cache";
  */
 export const getMyShopOrders = async () => {
   const token = await getValidToken();
-  // console.log({token});
+  console.log({ token });
 
   try {
     const res = await fetch(
@@ -24,7 +24,7 @@ export const getMyShopOrders = async () => {
         },
       }
     );
-    // console.log({res});
+    console.log({ res });
     if (!res.ok) {
       throw new Error(`Failed to fetch orders: ${res.statusText}`);
     }
@@ -101,7 +101,7 @@ export const updatePaymentStatus = async (
         cache: "no-store",
       }
     );
-    console.log({ res });
+    // console.log({ res });
     if (!res.ok) {
       const errorStatus = res.statusText;
       throw new Error(

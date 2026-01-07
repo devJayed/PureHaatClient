@@ -23,7 +23,7 @@ export default function OrderSuccessDialog({
   onClose,
   orderData,
 }: OrderSuccessDialogProps) {
-  console.log({ orderData });
+  // console.log({ orderData });
   const router = useRouter();
   const popupRef = useRef<HTMLDivElement>(null);
   if (!orderData) return null;
@@ -40,7 +40,7 @@ export default function OrderSuccessDialog({
     // discountAmount,
     totalAmount,
   } = orderData;
-  console.log("Products of oderSuccessDialog", { products });
+  // console.log("Products of oderSuccessDialog", { products });
 
   const handleSaveAndClose = async () => {
     if (!popupRef.current) return;

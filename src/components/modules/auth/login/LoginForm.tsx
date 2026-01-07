@@ -1,4 +1,5 @@
 "use client";
+import Logo from "@/assets/svgs/Logo";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -9,23 +10,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useUser } from "@/context/UserContext";
 import { loginUser } from "@/services/AuthService";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { jwtDecode } from "jwt-decode";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
-import Logo from "@/assets/svgs/Logo";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useUser } from "@/context/UserContext";
-import Link from "next/link";
 
 export default function LoginForm() {
   const form = useForm({
     resolver: zodResolver(loginSchema),
   });
-
-  // const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
-
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirectPath");
   const router = useRouter();
@@ -34,35 +32,44 @@ export default function LoginForm() {
     formState: { isSubmitting },
   } = form;
 
-  // const handleReCaptcha = async (value: string | null) => {
-  //   // console.log({value});
-  //   try {
-  //     const res = await reCaptchaTokenVerification(value!);
-  //     if (res?.success) {
-  //       setReCaptchaStatus(true);
-  //     }
-  //   } catch (err: any) {
-  //     console.error(err);
-  //   }
-  // };
   const { setIsLoading } = useUser();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // console.log({data});
+    // console.log({ data });
     try {
       const res = await loginUser(data);
-      setIsLoading(true);
-      // console.log({ res });
-      if (res?.success) {
-        toast.success(res?.message);
-        if (redirect) {
-          router.push(redirect);
-        } else {
-          router.push("/");
-        }
-      } else {
-        toast.error(res?.message);
+      if (!res?.success || !res?.data?.accessToken) {
+        toast.error("Login failed");
+        return;
       }
+      setIsLoading(true);
+      toast.success(res.message);
+      // ✅ Decode role from JWT
+      const decodedUser = jwtDecode(res?.data?.accessToken);
+      console.log(decodedUser);
+      const userRole = (decodedUser as any)?.role;
+      // console.log({ userRole });
+
+      // 1️⃣ Middleware redirect first
+      if (redirect) {
+        router.push(redirect);
+        return;
+      }
+      // 2️⃣ Role-based redirect
+      switch (userRole) {
+        case "admin":
+          router.replace("/protected/admin/dashboard");
+          break;
+        case "delivery":
+          router.replace("/protected/delivery/dashboard");
+          break;
+        case "user":
+          router.replace("/protected/user/dashboard");
+          break;
+        default:
+          router.replace("/");
+      }
+      // console.log({ res });
     } catch (err: any) {
       console.error(err);
     }
@@ -105,14 +112,6 @@ export default function LoginForm() {
               </FormItem>
             )}
           />
-
-          {/* <div className="flex mt-3 w-full">
-            <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!}
-              onChange={handleReCaptcha}
-              className="mx-auto"
-            />
-          </div> */}
 
           <Button
             disabled={!form.formState.isValid || isSubmitting}

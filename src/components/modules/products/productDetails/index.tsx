@@ -23,7 +23,7 @@ const ProductDetails = ({ product }: { product: IProduct }) => {
   const router = useRouter();
 
   const handleAddProduct = (product: IProduct) => {
-    console.log({ product });
+    // console.log({ product });
     dispatch(addProduct(product));
     toast.success(`${product.name} added to cart 🛍️`);
   };
