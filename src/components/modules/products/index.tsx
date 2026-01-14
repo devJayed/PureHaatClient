@@ -13,7 +13,7 @@ const AllProducts = ({
   categoryName: string;
 }) => {
   return (
-    <div className="flex gap-8 my-10 mt-18 sm:mt-0">
+    <div className="flex gap-8 my-10">
       {/* Left Sidebar */}
       <div className="hidden lg:block w-84">
         <Suspense fallback={null}>

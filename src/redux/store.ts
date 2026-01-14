@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "./features/cartSlice";
 import {
-  persistReducer,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistReducer,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from "redux-persist";
-import storage from "./storage";
+import cartReducer from "./features/cartSlice";
 import { couponMiddleware } from "./middlewares/coupon.middleware";
+import storage from "./storage";
 
 const persistOptions = {
   key: "cart",

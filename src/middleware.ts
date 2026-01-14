@@ -1,3 +1,6 @@
+//Note: This middleware handles authentication and role-based access control for protected routes.
+//its console.logs only work in vscode terminal
+
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "./services/AuthService";
 
@@ -6,19 +9,25 @@ type Role = keyof typeof roleBasedPrivateRoutes;
 const authRoutes = ["/login", "/register"];
 
 const roleBasedPrivateRoutes = {
-  user: [/^\/user/],
-  admin: [/^\/admin/],
-  delivery: [/^\/delivery/],
+  user: [/^\/protected\/user/],
+  admin: [/^\/protected\/admin/],
+  delivery: [/^\/protected\/delivery/],
 };
+
+// console.log("Middlewar is start working.....");
+// console.log(
+//   "roleBasedPrivateRoutes['admin']:",
+//   roleBasedPrivateRoutes["admin"]
+// );
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
-  // console.log({pathname});
+  // console.log("pathname:", { pathname });
 
   const userInfo = await getCurrentUser();
-  // console.log({userInfo});
+  // console.log("userInfo:", { userInfo });
 
-   // Public routes
+  // Public routes
   if (!userInfo) {
     if (authRoutes.includes(pathname)) {
       return NextResponse.next();
@@ -34,7 +43,7 @@ export const middleware = async (request: NextRequest) => {
 
   if (userInfo?.role && roleBasedPrivateRoutes[userInfo?.role as Role]) {
     const routes = roleBasedPrivateRoutes[userInfo?.role as Role];
-    // console.log({routes});
+    // console.log("roleBasedPrivateRoutes[userInfo?.role]:", { routes });
     if (routes.some((route) => pathname.match(route))) {
       return NextResponse.next();
     }
@@ -46,11 +55,12 @@ export const middleware = async (request: NextRequest) => {
 export const config = {
   matcher: [
     "/login",
-    "/admin",
-    "/admin/:page",
-    "/user",
-    "/user/:page",
-    "/delivery",
-    "/delivery/:page",
+    "/protected/:path*",
+    // "/protected/admin",
+    // "/protected/admin/:page",
+    // "/protected/user",
+    // "/protected/user/:page",
+    // "/protected/delivery",
+    // "/protected/delivery/:page",
   ],
 };

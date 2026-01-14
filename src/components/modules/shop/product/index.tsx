@@ -1,19 +1,19 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { NMTable } from "@/components/ui/core/NMTable/index";
+import TablePagination from "@/components/ui/core/NMTable/TablePagination";
+import { deleteProduct } from "@/services/Product";
 import { IProduct } from "@/types";
+import { IMeta } from "@/types/meta";
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit, Eye, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
-import DiscountModal from "./DiscountModal";
-import TablePagination from "@/components/ui/core/NMTable/TablePagination";
-import { IMeta } from "@/types/meta";
-import { deleteProduct } from "@/services/Product";
 import { toast } from "sonner";
+import DiscountModal from "./DiscountModal";
 // ✅ Import ShadCN AlertDialog
 import {
   AlertDialog,
@@ -29,7 +29,7 @@ import {
 
 const ManageProducts = ({
   products,
-  meta, 
+  meta,
 }: {
   products: IProduct[];
   meta: IMeta;
@@ -150,7 +150,7 @@ const ManageProducts = ({
             title="View"
             onClick={() =>
               router.push(
-                `/user/shop/products/view-product/${row.original._id}`
+                `/protected/admin/shop/products/view-product/${row.original._id}`
               )
             }
           >
@@ -162,7 +162,7 @@ const ManageProducts = ({
             title="Edit"
             onClick={() =>
               router.push(
-                `/user/shop/products/update-product/${row.original._id}`
+                `/protected/admin/shop/products/update-product/${row.original._id}`
               )
             }
           >
@@ -221,7 +221,9 @@ const ManageProducts = ({
         <h1 className="text-xl font-bold">Manage Products</h1>
         <div className="flex items-center gap-2">
           <Button
-            onClick={() => router.push("/user/shop/products/add-product")}
+            onClick={() =>
+              router.push("/protected/admin/shop/products/add-product")
+            }
             size="sm"
           >
             Add Product <Plus />

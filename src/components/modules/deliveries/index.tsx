@@ -1,14 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { ColumnDef } from "@tanstack/react-table";
 import { NMTable } from "@/components/ui/core/NMTable";
-import { toast } from "sonner";
-import { IOrder } from "@/types";
-import { Button } from "@/components/ui/button";
-import { updatePaymentStatus } from "@/services/Order";
-import { getStatusColor } from "@/lib/utils";
 import { PAYMENT_STATUSES } from "@/constants/status";
+import { getStatusColor } from "@/lib/utils";
+import { updatePaymentStatus } from "@/services/Order";
+import { IOrder } from "@/types";
+import { ColumnDef } from "@tanstack/react-table";
+import { useState } from "react";
+import { toast } from "sonner";
 
 type TOrdersProps = {
   orders: IOrder[];
@@ -40,17 +39,17 @@ const ManageDeliveries = ({ orders }: TOrdersProps) => {
   const columns: ColumnDef<IOrder>[] = [
     {
       accessorKey: "orderId",
-      header: () => <div className="min-w-[120px]">Order ID</div>,
+      header: () => <div className="min-w-6">Order ID</div>,
       cell: ({ row }) => <span>{row.original.orderId}</span>,
     },
     {
       accessorKey: "customerName",
-      header: () => <div className="min-w-[150px]">Customer</div>,
-      cell: ({ row }) => <span>{row.original.user?.name}</span>,
+      header: () => <div className="min-w-12">Customer</div>,
+      cell: ({ row }) => <span>{row.original?.name}</span>,
     },
     {
       accessorKey: "totalAmount",
-      header: () => <div className="min-w-[100px] text-right">Amount</div>,
+      header: () => <div className="min-w-6 text-right">Amount</div>,
       cell: ({ row }) => (
         <div className="text-right font-semibold">
           ৳{row.original.totalAmount.toFixed(2)}
@@ -59,7 +58,7 @@ const ManageDeliveries = ({ orders }: TOrdersProps) => {
     },
     {
       accessorKey: "paymentStatus",
-      header: () => <div className="min-w-[100px]">Payment</div>,
+      header: () => <div className="min-w-12">Payment</div>,
       cell: ({ row }) => {
         return (
           <div className="flex flex-col items-center gap-2">
@@ -92,7 +91,7 @@ const ManageDeliveries = ({ orders }: TOrdersProps) => {
 
     {
       accessorKey: "status",
-      header: () => <div className="min-w-[100px]">Order Status</div>,
+      header: () => <div className="min-w-12">Order Status</div>,
       cell: ({ row }) => {
         const status = row.original.status;
 
@@ -112,7 +111,7 @@ const ManageDeliveries = ({ orders }: TOrdersProps) => {
 
     {
       accessorKey: "createdAt",
-      header: () => <div className="min-w-[130px]">Date</div>,
+      header: () => <div className="min-w-6">Date</div>,
       cell: ({ row }) => (
         <span>
           {new Date(row.original.createdAt).toLocaleDateString("en-GB")}

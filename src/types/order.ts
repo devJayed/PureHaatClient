@@ -1,20 +1,21 @@
 import { IProduct } from "./product";
-import { IUser } from "./user";
 
 export interface IOrder {
   _id: string;
   orderId: string;
-  user: IUser;
+  name: string;
+  mobile: string;
+  email?: string;
   products: IProduct[];
   coupon?: string | null;
   totalAmount: number;
   discount: number;
   deliveryCharge: number;
   finalAmount: number;
-  status: "Pending" | "Processing" | "Completed" | "Cancelled";
+  status: "Received" | "In-Processing" | "Completed" | "Cancelled";
   shippingAddress: string;
   paymentMethod: "COD" | "Card" | "Online";
-  paymentStatus: "Pending" | "Processing" | "Paid" | "Cancelled" | "Failed";
+  paymentStatus: "Pending" | "In-Processing" | "Paid" | "Cancelled";
   createdAt: string;
   updatedAt: string;
 }

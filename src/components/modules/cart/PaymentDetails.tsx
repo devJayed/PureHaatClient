@@ -79,14 +79,14 @@ export default function PaymentDetails() {
       }
 
       const res = await createOrder(orderDataToSend);
-      console.log("Order response:", res);
+      // console.log("Order response:", res);
 
       // console.log("res.data", res.data);
 
       if (res.success) {
         toast.success(res.message, { id: orderLoading });
         setOrderData(res.data);
-        dispatch(clearCart()); 
+        dispatch(clearCart());
         setShowSuccess(true);
       } else {
         toast.error(res.message, { id: orderLoading });
@@ -122,11 +122,11 @@ export default function PaymentDetails() {
                   {currencyFormatter(discountAmount)}
                 </p>
               </div>
-              
+
               <hr />
             </div>
 
-            <div className="flex justify-between mt-2 mb-6">  
+            <div className="flex justify-between mt-2 mb-6">
               <p className="text-gray-500 ">সর্বমোট = </p>
               <p className="font-semibold">{currencyFormatter(grandTotal)}</p>
             </div>

@@ -38,7 +38,7 @@ const AllProductsPage = async ({
         {/* <ProductBanner title="All Products" path="Home - Products" /> */}
         {/* Featured collection - all categories  */}
         {!queriedCategory && (
-          <div className="mt-18 sm:mt-0">
+          <div className="">
             <h2 className="text-xl font-bold my-5">Featured Collection </h2>
             <div
               className="grid grid-cols-3

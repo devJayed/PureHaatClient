@@ -19,7 +19,9 @@ const ProductDetailsPage = async ({
         title="Product Details"
         path="Home -> Products -> Product Details"
       />
-      <ProductDetails product={product} />
+      <div className="">
+        <ProductDetails product={product} />
+      </div>
     </NMContainer>
   );
 };

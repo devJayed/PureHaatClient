@@ -53,7 +53,7 @@ const CartPage = () => {
   return (
     <>
       <NMContainer>
-        <div className="mt-18 sm:mt-2">
+        <div className="">
           <ProductBanner title="Cart Page" path="Home - Cart" />
         </div>
 
