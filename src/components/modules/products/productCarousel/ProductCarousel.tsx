@@ -1,16 +1,27 @@
 "use client";
 
-import Image from "next/image";
-import { Carousel } from "flowbite-react";
 import NMContainer from "@/components/ui/core/NMContainer";
+import { Carousel } from "flowbite-react";
+import Image from "next/image";
 
 export default function ProductCarousel() {
   return (
     <NMContainer>
       <div className="w-full h-72 sm:h-80 md:h-96 lg:h-[36rem] xl:h-[50rem] rounded-lg overflow-hidden mt-4">
         <Carousel slide indicators leftControl=" " rightControl=" ">
-          {/* Honey */}
+          {/* Ghur */}
           <div className="relative w-full h-full">
+            <Image
+              src="/banner/ghur-banner.png"
+              alt="Pure Honey"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+          </div>
+          {/* Honey */}
+          {/* <div className="relative w-full h-full">
             <Image
               src="/banner/honey-banner.png"
               alt="Pure Honey"
@@ -19,10 +30,10 @@ export default function ProductCarousel() {
               sizes="100vw"
               priority
             />
-          </div>
+          </div> */}
 
           {/* Pure Ghee */}
-          <div className="relative w-full h-full">
+          {/* <div className="relative w-full h-full">
             <Image
               src="/banner/ghee-banner.png"
               alt="Pure Ghee"
@@ -30,10 +41,10 @@ export default function ProductCarousel() {
               className="object-cover"
               sizes="100vw"
             />
-          </div>
+          </div> */}
 
           {/* Mustard Oil */}
-          <div className="relative w-full h-full">
+          {/* <div className="relative w-full h-full">
             <Image
               src="/banner/master-oil-banner.png"
               alt="Mustard Oil"
@@ -41,10 +52,10 @@ export default function ProductCarousel() {
               className="object-cover"
               sizes="100vw"
             />
-          </div>
+          </div> */}
 
           {/* Dates */}
-          <div className="relative w-full h-full">
+          {/* <div className="relative w-full h-full">
             <Image
               src="/banner/dates-banner.png"
               alt="Premium Dates"
@@ -52,7 +63,7 @@ export default function ProductCarousel() {
               className="object-cover"
               sizes="100vw"
             />
-          </div>
+          </div> */}
         </Carousel>
       </div>
     </NMContainer>
