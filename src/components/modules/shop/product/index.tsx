@@ -82,7 +82,7 @@ const ManageProducts = ({
               setSelectedIds((prev) => [...prev, row.original._id]);
             } else {
               setSelectedIds(
-                selectedIds.filter((id) => id !== row.original._id)
+                selectedIds.filter((id) => id !== row.original._id),
               );
             }
             row.toggleSelected(!!value);
@@ -150,7 +150,7 @@ const ManageProducts = ({
             title="View"
             onClick={() =>
               router.push(
-                `/protected/admin/shop/products/view-product/${row.original._id}`
+                `/protected/admin/shop/products/view-product/${row.original._id}`,
               )
             }
           >
@@ -162,7 +162,7 @@ const ManageProducts = ({
             title="Edit"
             onClick={() =>
               router.push(
-                `/protected/admin/shop/products/update-product/${row.original._id}`
+                `/protected/admin/shop/products/update-product/${row.original._id}`,
               )
             }
           >

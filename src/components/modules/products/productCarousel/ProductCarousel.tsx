@@ -7,63 +7,50 @@ import Image from "next/image";
 export default function ProductCarousel() {
   return (
     <NMContainer>
-      <div className="w-full h-72 sm:h-80 md:h-96 lg:h-[36rem] xl:h-[50rem] rounded-lg overflow-hidden mt-4">
-        <Carousel slide indicators leftControl=" " rightControl=" ">
-          {/* Ghur */}
-          <div className="relative w-full h-full">
-            <Image
-              src="/banner/ghur-banner.png"
-              alt="Pure Honey"
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
-            />
+      <div
+        className="
+        w-full
+        
+        rounded-lg
+        overflow-hidden
+       
+      "
+      >
+        <Carousel
+          slide
+          indicators
+          leftControl=" "
+          rightControl=" "
+          className="h-full"
+        >
+          {/* Slide 1 */}
+          <div className="relative w-full h-full flex items-center justify-center">
+            <div className="relative w-full h-full aspect-[2/1]">
+              <Image
+                src="/banner/test1-banner.png"
+                alt="Pure Honey"
+                fill
+                priority
+                sizes="100vw"
+                className="object-contain"
+              />
+            </div>
           </div>
-          {/* Honey */}
-          {/* <div className="relative w-full h-full">
-            <Image
-              src="/banner/honey-banner.png"
-              alt="Pure Honey"
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
-            />
-          </div> */}
 
-          {/* Pure Ghee */}
-          {/* <div className="relative w-full h-full">
-            <Image
-              src="/banner/ghee-banner.png"
-              alt="Pure Ghee"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-          </div> */}
-
-          {/* Mustard Oil */}
-          {/* <div className="relative w-full h-full">
-            <Image
-              src="/banner/master-oil-banner.png"
-              alt="Mustard Oil"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-          </div> */}
-
-          {/* Dates */}
-          {/* <div className="relative w-full h-full">
-            <Image
-              src="/banner/dates-banner.png"
-              alt="Premium Dates"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-          </div> */}
+          {/* You can add more slides here */}
+          {/*
+          <div className="relative w-full h-full flex items-center justify-center">
+            <div className="relative w-full h-full aspect-[2/1]">
+              <Image
+                src="/banner/test2-banner.png"
+                alt="Organic Products"
+                fill
+                sizes="100vw"
+                className="object-contain"
+              />
+            </div>
+          </div>
+          */}
         </Carousel>
       </div>
     </NMContainer>

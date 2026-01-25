@@ -6,14 +6,18 @@ import { getStatusColor } from "@/lib/utils";
 import { updateOrderStatus } from "@/services/Order";
 import { IOrder } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
+import { Eye } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import ViewOrdersModal from "./ViewOrdersModal";
 
 type TOrdersProps = {
   orders: IOrder[];
 };
 
 const ManageOrders = ({ orders }: TOrdersProps) => {
+  console.log({ orders });
+
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
   // console.log("Orders:", orders);
@@ -37,6 +41,19 @@ const ManageOrders = ({ orders }: TOrdersProps) => {
   };
 
   const columns: ColumnDef<IOrder>[] = [
+    {
+      header: "Action",
+      cell: ({ row }) => (
+        <ViewOrdersModal order={row.original}>
+          <button
+            className="text-gray-500 hover:text-blue-600"
+            title="View Order"
+          >
+            <Eye className="w-5 h-5" />
+          </button>
+        </ViewOrdersModal>
+      ),
+    },
     {
       accessorKey: "orderId",
       header: () => <div className="min-w-6">OrderID</div>,
@@ -64,7 +81,7 @@ const ManageOrders = ({ orders }: TOrdersProps) => {
           <div className="flex flex-col items-center gap-2">
             <select
               className={`border rounded px-2 py-1 text-sm font-medium transition-colors duration-200 text-center ${getStatusColor(
-                row.original.status
+                row.original.status,
               )}`}
               value={row.original.status}
               disabled={loadingId === row.original._id}
@@ -98,7 +115,7 @@ const ManageOrders = ({ orders }: TOrdersProps) => {
           <div className="flex items-center gap-2">
             <span
               className={`px-2 py-1 rounded border text-sm font-medium min-w-[100px] text-center ${getStatusColor(
-                status
+                status,
               )}`}
             >
               {status}

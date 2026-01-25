@@ -4,7 +4,7 @@ import { getMyShopOrders } from "@/services/Order";
 const OrderPage = async () => {
   const { data = [], meta } = await getMyShopOrders();
 
-  console.log("Data:", { data });
+  // console.log("Data:", { data });
 
   return (
     <div>

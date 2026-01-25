@@ -46,7 +46,7 @@ export default function LoginForm() {
       toast.success(res.message);
       // ✅ Decode role from JWT
       const decodedUser = jwtDecode(res?.data?.accessToken);
-      console.log(decodedUser);
+      // console.log(decodedUser);
       const userRole = (decodedUser as any)?.role;
       // console.log({ userRole });
 

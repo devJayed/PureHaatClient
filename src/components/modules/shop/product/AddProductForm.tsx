@@ -114,7 +114,7 @@ export default function AddProductsForm() {
   // console.log({ categories });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("Form Data:", { data });
+    // console.log("Form Data:", { data });
 
     const seoKeywords = data.seoKeywords.map(
       (size: { value: string }) => size.value

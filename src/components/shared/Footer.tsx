@@ -29,15 +29,18 @@ const Footer = () => {
           <p className="text-gray-600 mt-4 max-w-lg mx-auto text-sm md:text-base leading-relaxed">
             <span className="font-bold text-purple-700">PureHaat</span> একটি
             দেশীয় খাদ্যপণ্যের অনলাইন বিক্রয় কেন্দ্র। <br />
-            আমরা গ্রাম ও চরাঞ্চলে প্রাকৃতিকভাবে বেড়ে ওঠা 
+            আমরা গ্রাম ও চরাঞ্চলে প্রাকৃতিকভাবে বেড়ে ওঠা
             <span className="font-semibold text-purple-700">
-              দেশীয় হাস-মুরগি 
+              {" "}
+              দেশীয় হাস-মুরগি
             </span>
-            , <span className="font-semibold text-purple-700">গরুর দুধ</span>, 
+            , <span className="font-semibold text-purple-700">
+              গরুর দুধ
+            </span>,{" "}
             <span className="font-semibold text-purple-700">
-                ঘানি ভাঙা সরিষার তেল 
+              ঘানি ভাঙা সরিষার তেল
             </span>
-            , <span className="font-semibold text-purple-700">ঘি</span>,  
+            , <span className="font-semibold text-purple-700">ঘি</span>,
             <span className="font-semibold text-purple-700">মধু </span> ও
             <span className="font-semibold text-purple-700"> মসলা </span>সহ সব
             ধরণের খাদ্য পণ্য বিক্রয় করি।

@@ -22,14 +22,14 @@ const OrderSummaryCards = ({ orders }: Props) => {
 
         const totalAmount = filteredOrders.reduce(
           (sum, o) => sum + o.finalAmount,
-          0
+          0,
         );
 
         return (
           <div
             key={status.label}
             className={`rounded-xl border shadow-sm p-4 ${getStatusColor(
-              status.label
+              status.label,
             )}`}
           >
             <h3 className="text-sm font-semibold">{status.label}</h3>

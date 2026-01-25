@@ -29,40 +29,44 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   };
 
   return (
-    <Card className="p-3 min-w-[216px] bg-white transition-all duration-300 border border-gray-300 hover:border-yellow-500 hover:scale-103 shadow-md">
-      <CardHeader className="relative p-0 h-48">
-        <Link href={`/products/${product?._id}`} passHref>
+    <Card className="min-w-[216px] bg-white transition-all duration-300 border border-gray-300 hover:border-yellow-500 shadow-md">
+      <CardHeader className="p-0 flex justify-center">
+        <Link
+          href={`/products/${product?._id}`}
+          className="relative block w-full max-w-[220px] aspect-square overflow-hidden rounded-sm"
+        >
           <Image
             src={
-              product?.images[0].url ||
+              product?.images?.[0]?.url ||
               "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
             }
-            width={500}
-            height={500}
-            alt="product image"
-            className="rounded-sm h-48 object-cover"
+            alt={product?.name || "product image"}
+            fill
+            sizes="(max-width: 640px) 100vw, 220px"
+            className="object-contain transition-transform duration-300 hover:scale-105"
           />
+
           {product?.stock === 0 && (
-            <div className="absolute left-2 top-0 bg-red-500 text-white px-2 rounded-full">
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
               Out of Stock
             </div>
           )}
         </Link>
       </CardHeader>
 
-      <CardContent className=" p-0 mt-2">
-        <Link href={`/products/${product?._id}`} passHref>
+      <CardContent className="p-0 mx-2 text-center">
+        <Link href={`/products/${product?._id}`}>
           <CardTitle
             title={product?.name}
             className="font-bold cursor-pointer text-md"
           >
-            {product?.name.length > 20
-              ? product?.name?.slice(0, 20) + "..."
+            {product?.name.length > 35
+              ? product?.name?.slice(0, 35) + "..."
               : product?.name}
           </CardTitle>
         </Link>
 
-        <div className="flex items-center justify-between my-2">
+        <div className="flex items-center justify-center mt-2 mx-2 text-center">
           <p className="text-sm text-gray-700">
             {product?.offerPrice ? (
               <>
@@ -89,7 +93,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         </div>
       </CardContent>
 
-      <CardFooter className="p-0">
+      <CardFooter className="p-0 mx-2">
         <div className="flex flex-wrap gap-2 items-center justify-between w-full">
           <Button
             onClick={() => handleAddProduct(product)}
