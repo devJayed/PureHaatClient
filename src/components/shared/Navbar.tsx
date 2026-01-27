@@ -29,12 +29,13 @@ export default function Navbar({ categories }: { categories: any[] }) {
   const cartProducts = useAppSelector(orderedProductsSelector);
   const totalItems = cartProducts.reduce(
     (total, item) => total + item.orderQuantity,
-    0
+    0,
   );
 
   const handleLogout = () => {
     logout();
     setIsLoading(true);
+    router.refresh();
     router.push("/");
   };
 

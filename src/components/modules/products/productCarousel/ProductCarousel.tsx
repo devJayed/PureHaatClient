@@ -10,10 +10,8 @@ export default function ProductCarousel() {
       <div
         className="
         w-full
-        
         rounded-lg
         overflow-hidden
-       
       "
       >
         <Carousel

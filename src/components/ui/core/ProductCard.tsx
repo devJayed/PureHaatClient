@@ -60,8 +60,8 @@ const ProductCard = ({ product }: { product: IProduct }) => {
             title={product?.name}
             className="font-bold cursor-pointer text-md"
           >
-            {product?.name.length > 35
-              ? product?.name?.slice(0, 35) + "..."
+            {product?.name.length > 20
+              ? product?.name?.slice(0, 20) + "..."
               : product?.name}
           </CardTitle>
         </Link>

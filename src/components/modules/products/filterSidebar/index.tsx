@@ -6,11 +6,8 @@ import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 // import { getAllCategories } from "@/services/Category";
 // import { toast } from "sonner";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Star } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const FilterSidebar = () => {
   const [price, setPrice] = useState([0]);
@@ -66,11 +63,11 @@ const FilterSidebar = () => {
           }}
           className="w-full"
         />
-        
+
         <p className="text-sm mt-2">Selected Price: ${price[0]}</p>
       </div>
       {/* Rating */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <h2 className="text-lg font-semibold mb-4">Rating</h2>
         <RadioGroup className="space-y-3">
           {[5, 4, 3, 2, 1].map((rating) => (
@@ -93,7 +90,7 @@ const FilterSidebar = () => {
             </div>
           ))}
         </RadioGroup>
-      </div>
+      </div> */}
     </div>
   );
 };

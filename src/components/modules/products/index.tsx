@@ -3,6 +3,7 @@
 import ProductCard from "@/components/ui/core/ProductCard";
 import { IProduct } from "@/types";
 import { Suspense } from "react";
+import EmptyState from "./emptyState/EmptyState";
 import FilterSidebar from "./filterSidebar";
 
 const AllProducts = ({
@@ -12,6 +13,14 @@ const AllProducts = ({
   products: IProduct[];
   categoryName: string;
 }) => {
+  if (!products || products.length === 0) {
+    return (
+      <EmptyState
+        title="No products are available"
+        description={`There are currently no products under "${categoryName}".`}
+      />
+    );
+  }
   return (
     <div className="flex gap-8 my-10">
       {/* Left Sidebar */}

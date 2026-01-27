@@ -29,10 +29,10 @@ const Navbar2Client = ({ categories }: Navbar2ClientProps) => {
             <Button
               variant="outline"
               className={clsx(
-                "rounded-full flex items-center gap-2 transition-all",
+                "rounded-full cursor-pointer hover:scale-105 flex items-center gap-2 transition-all",
                 isAllProductsActive
                   ? "bg-blue-100 border-blue-500 text-blue-700"
-                  : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
+                  : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100 ",
               )}
             >
               🛍️ All Products
@@ -50,10 +50,10 @@ const Navbar2Client = ({ categories }: Navbar2ClientProps) => {
                 <Button
                   variant="outline"
                   className={clsx(
-                    "rounded-full flex items-center gap-2 transition-all",
+                    "rounded-full cursor-pointer hover:scale-105 flex items-center gap-2 transition-all",
                     isActive
                       ? "bg-blue-100 border-blue-500 text-blue-700"
-                      : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
+                      : "bg-white border-gray-200 text-gray-700 hover:bg-gray-100",
                   )}
                 >
                   <Image
