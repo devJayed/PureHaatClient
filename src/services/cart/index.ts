@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 
 export const createOrder = async (order: IOrder) => {
   try {
+    // console.log("Creating order:", order);
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/order`, {
       method: "POST",
       headers: {
@@ -20,10 +21,7 @@ export const createOrder = async (order: IOrder) => {
   }
 };
 
-export const addCoupon = async (
-  couponCode: string,
-  subTotal: number,
-) => {
+export const addCoupon = async (couponCode: string, subTotal: number) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/coupon/${couponCode}`,
@@ -34,7 +32,7 @@ export const addCoupon = async (
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ orderAmount: subTotal }),
-      }
+      },
     );
 
     return await res.json();

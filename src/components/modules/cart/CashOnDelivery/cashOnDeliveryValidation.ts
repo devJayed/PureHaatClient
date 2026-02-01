@@ -19,4 +19,6 @@ export const cashOnDeliverySchema = z.object({
   mobile: z.string().regex(/^01[3-9]\d{8}$/, "সঠিক মোবাইল নম্বর দিন"),
 
   shippingAddress: z.string().trim().min(4, "ঠিকানা কমপক্ষে ৪ অক্ষরের হতে হবে"),
+
+  city: z.string().min(1, "শিপিং মেথড নির্বাচন করুন"),
 });

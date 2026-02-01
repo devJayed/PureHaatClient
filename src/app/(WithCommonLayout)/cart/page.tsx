@@ -25,7 +25,7 @@ const CartPage = () => {
 
         <div className="grid grid-cols-1 mt-2 sm:mt-3">
           {/* Left Section – Only Cart Products */}
-          <div className="lg:col-span-8 space-y-6">
+          <div className="lg:col-span-8 space-y-6 mb-10">
             <CartProducts />
 
             {/* Cash on Delivery Button */}
