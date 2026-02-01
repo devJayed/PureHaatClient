@@ -37,7 +37,9 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Button } from "@/components/ui/button";
 import { createOrder } from "@/services/cart";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import OrderSuccessDialog from "../OrderSuccessDialog";
 import { cashOnDeliverySchema } from "./cashOnDeliveryValidation";
 
 type Props = {
@@ -56,6 +58,8 @@ const CashOnDeliveryDialog = ({ open, setOpen }: Props) => {
   const dispatch = useAppDispatch();
   const products = useAppSelector(orderedProductsSelector);
   const order = useAppSelector(orderSelector);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [orderData, setOrderData] = useState<any>(null);
 
   const form = useForm<CODFormValues>({
     resolver: zodResolver(cashOnDeliverySchema),
@@ -97,6 +101,9 @@ const CashOnDeliveryDialog = ({ open, setOpen }: Props) => {
       }
 
       toast.success(res.message, { id: toastId });
+      setOrderData(res.data);
+      // Show Success Popup
+      setShowSuccess(true);
       dispatch(clearCart());
       setOpen(false);
     } catch (err: any) {
@@ -105,178 +112,179 @@ const CashOnDeliveryDialog = ({ open, setOpen }: Props) => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="w-[98vw] sm:w-[96vw] md:w-[94vw] max-w-none h-[95vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-lg sm:text-2xl font-bold text-center">
-            ক্যাশ অন ডেলিভারি
-          </DialogTitle>
-        </DialogHeader>
+    <>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="w-[98vw] sm:w-[96vw] md:w-[94vw] max-w-none h-[95vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-lg sm:text-2xl font-bold text-center">
+              ক্যাশ অন ডেলিভারি
+            </DialogTitle>
+          </DialogHeader>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* ================= CUSTOMER INFO ================= */}
-            <div className="space-y-4 max-w-lg">
-              {/* Name */}
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-bold text-lg">
-                      আপনার নাম <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <div
-                        className=" group flex items-center
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {/* ================= CUSTOMER INFO ================= */}
+              <div className="space-y-4 max-w-lg">
+                {/* Name */}
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold text-lg">
+                        আপনার নাম <span className="text-red-500">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <div
+                          className=" group flex items-center
             border rounded-md overflow-hidden
             transition-colors
             hover:border-amber-600
             focus-within:border-amber-600
             focus-within:ring-0"
-                      >
-                        <div className="bg-gray-200 px-4 py-3 border-r flex items-center justify-center">
-                          <User
-                            className=" w-5 h-5
+                        >
+                          <div className="bg-gray-200 px-4 py-3 border-r flex items-center justify-center">
+                            <User
+                              className=" w-5 h-5
         text-gray-600
         transition-colors
         group-hover:text-amber-600
         group-focus-within:text-amber-600"
-                          />
-                        </div>
-                        <Input
-                          {...field}
-                          placeholder="আপনার নাম লিখুন"
-                          className="w-full py-5
+                            />
+                          </div>
+                          <Input
+                            {...field}
+                            placeholder="আপনার নাম লিখুন"
+                            className="w-full py-5
              border-0 shadow-none
       focus:outline-none focus:ring-0
       focus-visible:ring-0"
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              {/* Mobile */}
-              <FormField
-                control={form.control}
-                name="mobile"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-bold text-lg">
-                      মোবাইল নম্বর <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <div
-                        className="group flex items-center
+                {/* Mobile */}
+                <FormField
+                  control={form.control}
+                  name="mobile"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold text-lg">
+                        মোবাইল নম্বর <span className="text-red-500">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <div
+                          className="group flex items-center
             border rounded-md overflow-hidden
             transition-colors
             hover:border-amber-600
             focus-within:border-amber-600
             focus-within:ring-0"
-                      >
-                        <div className="bg-gray-200 px-4 py-3 border-r flex items-center justify-center">
-                          <Phone
-                            className=" text-gray-600
+                        >
+                          <div className="bg-gray-200 px-4 py-3 border-r flex items-center justify-center">
+                            <Phone
+                              className=" text-gray-600
         transition-colors
         group-hover:text-amber-600
         group-focus-within:text-amber-600"
-                          />
-                        </div>
-                        <Input
-                          {...field}
-                          placeholder="01XXXXXXXXX"
-                          className="w-full py-5
+                            />
+                          </div>
+                          <Input
+                            {...field}
+                            placeholder="01XXXXXXXXX"
+                            className="w-full py-5
              border-0 shadow-none
       focus:outline-none focus:ring-0
       focus-visible:ring-0"
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              {/* Address */}
-              <FormField
-                control={form.control}
-                name="shippingAddress"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-bold text-lg">
-                      ডেলিভারি এড্রেস <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <div
-                        className=" group flex items-center
+                {/* Address */}
+                <FormField
+                  control={form.control}
+                  name="shippingAddress"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold text-lg">
+                        ডেলিভারি এড্রেস <span className="text-red-500">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <div
+                          className=" group flex items-center
             border rounded-md overflow-hidden
             transition-colors
             hover:border-amber-600
             focus-within:border-amber-600
             focus-within:ring-0"
-                      >
-                        <div className="bg-gray-200 px-4 py-3 border-r flex items-center justify-center">
-                          <MapPinPlus
-                            className="w-5 h-5 text-gray-600
+                        >
+                          <div className="bg-gray-200 px-4 py-3 border-r flex items-center justify-center">
+                            <MapPinPlus
+                              className="w-5 h-5 text-gray-600
         transition-colors
         group-hover:text-amber-600
         group-focus-within:text-amber-600"
-                          />
-                        </div>
-                        <Input
-                          {...field}
-                          placeholder="জেলা, উপজেলা, লোকেশন"
-                          className="w-full py-5
+                            />
+                          </div>
+                          <Input
+                            {...field}
+                            placeholder="জেলা, উপজেলা, লোকেশন"
+                            className="w-full py-5
              border-0 shadow-none
       focus:outline-none focus:ring-0
       focus-visible:ring-0"
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              {/* Shipping Method */}
-              <Address control={form.control} />
-            </div>
+                {/* Shipping Method */}
+                <Address control={form.control} />
+              </div>
 
-            {/* <hr /> */}
-            {/* <Coupon /> */}
-            <hr />
+              {/* <hr /> */}
+              {/* <Coupon /> */}
+              <hr />
 
-            {/* ================= Product Summary ================= */}
-            <div className="w-full bg-white border rounded-md overflow-hidden">
-              {/* ---------- Table Header ---------- */}
-              <div
-                className="
+              {/* ================= Product Summary ================= */}
+              <div className="w-full bg-white border rounded-md overflow-hidden">
+                {/* ---------- Table Header ---------- */}
+                <div
+                  className="
       grid grid-cols-[24px_1fr_48px_64px_64px]
       gap-1 px-3 py-2
       text-xs font-semibold text-gray-500
       bg-gray-100
       border-b
     "
-              >
-                <span className="text-center">SL</span>
-                <span>Product</span>
-                <span className="text-center">Qty</span>
-                <span className="text-right">Unit (৳)</span>
-                <span className="text-right">Total (৳)</span>
-              </div>
+                >
+                  <span className="text-center">SL</span>
+                  <span>Product</span>
+                  <span className="text-center">Qty</span>
+                  <span className="text-right">Unit (৳)</span>
+                  <span className="text-right">Total (৳)</span>
+                </div>
 
-              {/* ---------- Product Rows ---------- */}
-              {products.map((product: CartProduct, index: number) => {
-                const qty = product.orderQuantity ?? 1;
-                const unitPrice = product.offerPrice ?? product.price;
+                {/* ---------- Product Rows ---------- */}
+                {products.map((product: CartProduct, index: number) => {
+                  const qty = product.orderQuantity ?? 1;
+                  const unitPrice = product.offerPrice ?? product.price;
 
-                return (
-                  <div
-                    key={product._id}
-                    className="
+                  return (
+                    <div
+                      key={product._id}
+                      className="
           grid grid-cols-[24px_1fr_48px_64px_64px]
           gap-1 px-3 py-3
           items-center
@@ -285,50 +293,50 @@ const CashOnDeliveryDialog = ({ open, setOpen }: Props) => {
           hover:bg-amber-50
           transition-colors
         "
-                  >
-                    {/* SL */}
-                    <span className="text-center font-semibold text-gray-700">
-                      {index + 1}
-                    </span>
+                    >
+                      {/* SL */}
+                      <span className="text-center font-semibold text-gray-700">
+                        {index + 1}
+                      </span>
 
-                    {/* Product */}
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="relative w-10 h-10 rounded-md overflow-hidden shrink-0">
-                        <Image
-                          src={product.images?.[0]?.url || "/placeholder.png"}
-                          alt={product.name}
-                          fill
-                          className="object-cover"
-                        />
+                      {/* Product */}
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="relative w-10 h-10 rounded-md overflow-hidden shrink-0">
+                          <Image
+                            src={product.images?.[0]?.url || "/placeholder.png"}
+                            alt={product.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <span className="truncate font-medium text-gray-800">
+                          {product.name}
+                        </span>
                       </div>
-                      <span className="truncate font-medium text-gray-800">
-                        {product.name}
+
+                      {/* Qty */}
+                      <span className="text-center font-medium">{qty}</span>
+
+                      {/* Unit Price */}
+                      <span className="text-right">{unitPrice}</span>
+
+                      {/* Total */}
+                      <span className="text-right font-semibold">
+                        {qty * unitPrice}
                       </span>
                     </div>
+                  );
+                })}
+              </div>
 
-                    {/* Qty */}
-                    <span className="text-center font-medium">{qty}</span>
+              {/* ================= PAYMENT SUMMARY ================= */}
+              <PaymentDetails />
 
-                    {/* Unit Price */}
-                    <span className="text-right">{unitPrice}</span>
-
-                    {/* Total */}
-                    <span className="text-right font-semibold">
-                      {qty * unitPrice}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* ================= PAYMENT SUMMARY ================= */}
-            <PaymentDetails />
-
-            {/* ================= SUBMIT ================= */}
-            <Button
-              type="submit"
-              disabled={!isValid || isSubmitting}
-              className="w-full
+              {/* ================= SUBMIT ================= */}
+              <Button
+                type="submit"
+                disabled={!isValid || isSubmitting}
+                className="w-full
     bg-gradient-to-r from-amber-500 to-amber-600
     hover:from-amber-600 hover:to-amber-700
     text-white
@@ -343,13 +351,20 @@ const CashOnDeliveryDialog = ({ open, setOpen }: Props) => {
     disabled:cursor-not-allowed 
     disabled:bg-gray-300
 disabled:from-gray-300 disabled:to-gray-400"
-            >
-              {isSubmitting ? "অর্ডার হচ্ছে..." : "অর্ডার কনফার্ম করুন"}
-            </Button>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+              >
+                {isSubmitting ? "অর্ডার হচ্ছে..." : "অর্ডার কনফার্ম করুন"}
+              </Button>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+      {/* ✅ Success Popup */}
+      <OrderSuccessDialog
+        open={showSuccess}
+        onClose={() => setShowSuccess(false)}
+        orderData={orderData}
+      />
+    </>
   );
 };
 
